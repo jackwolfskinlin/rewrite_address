@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/xiaoju/!svn/ver/41655/server/offline_scripts/strategy/trunk/poi/rewrite_service/data
+END
+ba.txt
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/xiaoju/!svn/ver/40938/server/offline_scripts/strategy/trunk/poi/rewrite_service/data/ba.txt
+END
+click.txt
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/xiaoju/!svn/ver/41655/server/offline_scripts/strategy/trunk/poi/rewrite_service/data/click.txt
+END
+all_region.txt
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/xiaoju/!svn/ver/40938/server/offline_scripts/strategy/trunk/poi/rewrite_service/data/all_region.txt
+END
+white_list.txt
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/xiaoju/!svn/ver/40938/server/offline_scripts/strategy/trunk/poi/rewrite_service/data/white_list.txt
+END
+city_prov.txt
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/xiaoju/!svn/ver/40938/server/offline_scripts/strategy/trunk/poi/rewrite_service/data/city_prov.txt
+END

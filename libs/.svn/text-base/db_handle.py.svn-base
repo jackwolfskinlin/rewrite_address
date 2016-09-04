@@ -1,0 +1,122 @@
+#coding=utf-8
+import time
+import MySQLdb
+import sys
+
+class DbHandle:
+    def __init__(self, host_name, port, usr_name, usr_password, data_base, charset = 'UTF8'):
+        self.m_host_name = host_name
+        self.m_usr_name = usr_name
+        self.m_usr_password = usr_password
+        self.m_db = data_base
+        self.m_charset = charset
+        self.m_port = port
+        self.m_conn = None
+        self.m_cursor = None
+        self.m_auto_commit = True
+        
+    def CreateConn(self):
+        try:
+            self.m_conn = MySQLdb.connect(host = self.m_host_name,
+                                          user = self.m_usr_name,
+                                          port = self.m_port,
+                                          passwd = self.m_usr_password,
+                                          db = self.m_db,
+                                          connect_timeout = 3
+                                          )
+            self.m_cursor = self.m_conn.cursor()
+            self.m_cursor.execute('set names ' + self.m_charset)
+            self.m_conn.commit()
+            return True
+        except Exception, e:
+            pass
+        return False
+    
+    def IsConned(self):
+        if (not self.m_conn) or (not self.m_cursor):
+            return False
+        return True
+        
+    def ExecuteSql(self, sql_str):
+        if not self.IsConned():
+            return False
+        try:
+            self.m_cursor.execute(sql_str)
+            if self.m_auto_commit:
+                self.m_conn.commit()
+        except Exception, e:
+            #print e
+            return False
+        return True
+
+    def FetchOneSql(self, sql_str):
+        if not self.IsConned():
+            return None
+        try:
+            self.m_cursor.execute(sql_str)
+            return self.m_cursor.fetchone()
+        except Exception, e:
+            #print e
+            pass
+        return None
+
+    def FetchAllSql(self, sql_str):
+        if not self.IsConned():
+            return None
+        try:
+            self.m_cursor.execute(sql_str)
+            return self.m_cursor.fetchall()
+        except Exception, e:
+            #print e
+            pass
+        return None
+
+    def EscapeString(self, str_word):
+        if not self.IsConned():
+            return None
+        try:
+            return self.m_conn.escape_string(str_word)
+        except Exception, e:
+            pass
+        return None
+
+    def LockTables(self, table_name_list):
+        sql_str = 'lock tables '
+        for i in range(len(table_name_list)):
+            table_name_i = table_name_list[i]
+            if i == 0:
+                sql_str = sql_str + ' ' + table_name_i + ' write'
+            else:
+                sql_str = sql_str +', ' + table_name_i + ' write'
+        self.ExecuteSql(sql_str)
+        self.m_auto_commit = False
+        self.m_conn.autocommit(False)
+
+    def UnLockTables(self):
+        self.m_auto_commit = True
+        self.m_conn.autocommit(True)
+        sql_str = "unlock tables;"
+        self.ExecuteSql(sql_str)
+
+    def Close(self):
+        try:
+            self.m_cursor.close()
+            self.m_conn.close()
+        except Exception, e:
+            print e
+
+if __name__=='__main__':
+    db_handle = DbHandle('localhost','xiaoju','!@#xiaoju$%^','app_dididache')
+    db_handle.CreateConn()
+    if not db_handle.IsConned():
+        print 'db handle init failed'
+        sys.exit(1)
+    table_name_list = []
+    table_name_list.append('tb_stra_dict')
+    table_name_list.append('tb_stra_dict_word')
+    db_handle.LockTables(table_name_list)
+    time.sleep(3)
+    db_handle.UnLockTables()
+
+    db_handle.Close()
+

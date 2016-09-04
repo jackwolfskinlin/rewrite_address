@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/xiaoju/!svn/ver/55977/server/offline_scripts/strategy/trunk/poi/rewrite_service/libs
+END
+MySQLdb.py
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/xiaoju/!svn/ver/41988/server/offline_scripts/strategy/trunk/poi/rewrite_service/libs/MySQLdb.py
+END
+db_handle.py
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/xiaoju/!svn/ver/41988/server/offline_scripts/strategy/trunk/poi/rewrite_service/libs/db_handle.py
+END
+memcache.py
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/xiaoju/!svn/ver/55177/server/offline_scripts/strategy/trunk/poi/rewrite_service/libs/memcache.py
+END
